@@ -176,6 +176,27 @@ function getEducation(data){
     return arr;
 }
 
+function getOrganizations(data) {
+  const arr = [];
+  data.forEach(org => {
+    const orgName = {
+      text: org.name,
+      margin: [0, 12, 0, 0],
+      fontSize: 14,
+      bold: true
+    };
+    const orgPosition = {
+      text: org.position,
+      margin: [0, 8, 0, 0],
+      fontSize: 11,
+      italics: true
+    };
+    arr.push(orgName);
+    arr.push(orgPosition);
+  });
+  return arr;
+}
+
 function generatePDF(resume){
     // TODO switch statement to generate certain pdf based on template
     const docDefinition = {
@@ -216,6 +237,18 @@ function generatePDF(resume){
           ]
         },
         {
+          text: "OBJECTIVE",
+          fontSize: 18,
+          bold: true,
+          margin: [15, 25, 0, 0],
+        },
+        {
+          margin: [15, 15, 0, 0],
+          columnGap: COLUMN_GAP,
+          text: resume.objective,
+          width: "auto"
+        },
+        {
           // main container for pdf
           margin: [15, 25, 0, 0],
           columns: [
@@ -235,9 +268,20 @@ function generatePDF(resume){
               [
                 // other columns
                 {
-                  text: "ACHIEVEMENTS",
+                  text: "ORGANIZATIONS",
                   fontSize: 18,
                   bold: true
+                },
+                {
+                  svg: getDivider("50%", resume.settings.color.hex),
+                  margin: [0, 5, 0, 0]
+                },
+                getOrganizations(resume.organizations),
+                {
+                  text: "ACHIEVEMENTS",
+                  fontSize: 18,
+                  bold: true,
+                  margin: [0, 25, 0, 0]
                 },
                 {
                   svg: getDivider("50%", resume.settings.color.hex),
@@ -248,7 +292,7 @@ function generatePDF(resume){
                   text: "SKILLS",
                   fontSize: 18,
                   bold: true,
-                  margin: [0, 15, 0, 0]
+                  margin: [0, 25, 0, 0]
                 },
                 {
                   svg: getDivider("50%", resume.settings.color.hex),
@@ -259,7 +303,7 @@ function generatePDF(resume){
                   text: "EDUCATION",
                   fontSize: 18,
                   bold: true,
-                  margin: [0, 15, 0, 0]
+                  margin: [0, 25, 0, 0]
                 },
                 {
                   svg: getDivider("50%", resume.settings.color.hex),

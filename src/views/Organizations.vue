@@ -8,7 +8,7 @@
                 </p>
             </div>
             <div class="col-3" style="align-self: center; text-align: right;">
-                <button class="icon-button">
+                <button class="icon-button" @click="addOrganization(genOrganization()); updateLocalStorage();">
                     <v-icon :icon="['fas', 'plus']" size="2x"></v-icon>
                 </button>
             </div>
